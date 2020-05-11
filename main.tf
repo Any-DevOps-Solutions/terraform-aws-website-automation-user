@@ -6,10 +6,6 @@ resource "aws_iam_user" "automation_user" {
   name = "${var.domain}_automation_user"
 }
 
-locals {
-  bucket_paths = [formatlist("%s/*", var.bucket_arns)]
-}
-
 data "aws_iam_policy_document" "automation_user_policy" {
   statement {
     actions = [
@@ -33,7 +29,7 @@ data "aws_iam_policy_document" "automation_user_policy" {
     # If the expression in the following list itself returns a list, remove the
     # brackets to avoid interpretation as a list of lists. If the expression
     # returns a single list item then leave it as-is and remove this TODO comment.
-    resources = [local.bucket_paths]
+    resources = [var.bucket_arn]
   }
 
   statement {
