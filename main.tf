@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "automation_user_policy" {
       "s3:ListBucket",
     ]
 
-    resources = var.bucket_arns
+    resources = [var.bucket_arn]
   }
 
   statement {
